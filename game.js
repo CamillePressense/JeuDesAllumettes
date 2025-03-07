@@ -22,26 +22,35 @@ function removeMatches(totalOfMatches, nbOfMatches){
     return totalRemaining;
 }
 
+// Je demande combien il y a de joueurs et renvoie la liste des joueurs.
+
+function asKNbOfPlayer(){
+    let listOfPlayer = [];
+    let nbOfPlayer = Number(prompt("Combien de joueurs êtes vous ?"));
+    for ( let i = 1 ;  i <= nbOfPlayer; i++){
+        listOfPlayer.push(`Joueur ${i}`)
+    }
+    return listOfPlayer
+}
+
+
+
 // Je définis le déroulement du jeu à deux joueurs, et la victoire quand la dernière allumette a été prise.
 
 function gamePlay(){
-    let player1NbOfMatches;
-    let player2NbOfMatches;
+    let listOfPlayer = asKNbOfPlayer()
     let remainder = TOTALOFMATCHES;
-    
+    let playerNbOfMatches;
+
     while (remainder > 0){
-        player1NbOfMatches = askNbToRemove(remainder, "Joueur 1");
-        remainder = removeMatches(remainder, player1NbOfMatches);
+    for (player of listOfPlayer) {
+            playerNbOfMatches = askNbToRemove(remainder, player);
+            remainder = removeMatches(remainder, playerNbOfMatches);
 
-        if (remainder <= 0){
-            alert("Bravo Joueur 1, tu as récupéré la dernière allumette. Tu as gagné!")
-        }
-        player2NbOfMatches = askNbToRemove(remainder, "Joueur 2");
-        remainder = removeMatches(remainder, player2NbOfMatches);
-
-        if (remainder <= 0){
-            alert("Bravo Joueur 2, tu as récupéré la dernière allumette. Tu as gagné!")
-        }
+            if (remainder <= 0){
+                alert(`Bravo ${player}, tu as récupéré la dernière allumette. Tu as gagné!`) 
+            }
+        }        
     }    
 }
 
